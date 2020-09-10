@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    {% block content %}
+    {% endblock content %}
+</body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    {% if style %}
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/' + style)}}">
+    {% endif %}
+    
+    {% if custom_js %}
+        <script type="text/javascript" src="{{url_for('static', filename='js/' + custom_js)}}"></script>
+    {% endif %}
+
+    {% if title %}
+        <title>{{title}}</title>
+    {% else %}
+        <title>Countdown App</title>
+    {% endif %}
+</head>
+</html>
