@@ -5,8 +5,8 @@ import logging
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'sdfbW%$EYGHw$%Hwe4r'
 # app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon.ico'))
-app.config['DEBUG'] = True
-logging.basicConfig(level=logging.DEBUG)
+# app.config['DEBUG'] = True
+# logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/', methods=['GET', 'POST'])
 def countdown():
@@ -28,4 +28,4 @@ def display():
 #     time = request.form.get('time', 180)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run()
