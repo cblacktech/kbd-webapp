@@ -16,11 +16,11 @@ def countdown():
         # return redirect(url_for('display'))
         return redirect('/display')
     else:
-        return render_template('countdown.html', style='countdown.css', custom_js='countdown.js')
+        return render_template('countdown.html', title="Countdown", style='countdown.css', custom_js='countdown.js')
 
 @app.route('/display')
 def display():
-    return render_template('display.html', title="Display Page", name="display page")
+    return render_template('display.html', title="Display Page", style="display.css", name="display page")
     # return "<script>alert('Hello There');</script>"
 
 # @app.route('/', methods=['GET', 'POST'])
