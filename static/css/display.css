@@ -5,3 +5,34 @@ body{
   font-family: sans-serif;
   font-weight: 100;
 }
+
+img {
+	/* max-width: 32%; */
+	width: 100%;
+	/* height: auto; */
+}
+
+* {
+	box-sizing: border-box;
+}
+
+pre {
+	font-size: 15px;
+}
+
+p {
+	font-size: 40px;
+}
+
+.row {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+.column {
+	float: left;
+	width: 48%;
+	padding: 2%;
+	margin-left: 16px;
+}
