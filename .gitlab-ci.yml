@@ -20,6 +20,7 @@ release_image:
   services:
     - docker:dind
   before_script:
+    - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
   script:
     - docker login -u _ -p "$HEROKU_AUTH_TOKEN" registry.heroku.com
