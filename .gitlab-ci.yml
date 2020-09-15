@@ -15,7 +15,10 @@ build_image:
   
 
 release_image:
+  image: docker:latest
   stage: release
+  services:
+    - docker:dind
   before_script:
     - curl https://cli-assets.heroku.com/install.sh | sh
   script:
