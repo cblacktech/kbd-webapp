@@ -1,6 +1,6 @@
 stages:
   - build
-   - release
+  - release
 
 build_image:
   image: docker:latest
@@ -14,11 +14,11 @@ build_image:
     - docker push "$CI_REGISTRY_IMAGE"
   
 
- release:
-   stage: release
-   before_script:
-     - curl https://cli-assets.heroku.com/install.sh | sh
-   script:
-     - docker login -u _ -p ${HEROKU_AUTH_TOKEN} registry.heroku.com
-     - docker push ${HEROKU_REGISTRY_IMAGE}
-     - heroku container:release --app "$CI_PROJECT_NAME" web
+release_image:
+  stage: release
+  before_script:
+    - curl https://cli-assets.heroku.com/install.sh | sh
+  script:
+    - docker login -u _ -p "$HEROKU_AUTH_TOKEN" registry.heroku.com
+    - docker push "$HEROKU_REGISTRY_IMAGE"
+    - heroku container:release --app "$CI_PROJECT_NAME" web
