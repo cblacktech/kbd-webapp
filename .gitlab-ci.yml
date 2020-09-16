@@ -19,6 +19,8 @@ release_image:
   stage: release
   before_script:
     - apk add curl
+    - apk add bash
+    - apk add nodejs
     - curl https://cli-assets.heroku.com/install.sh | sh
   script:
     - docker login -u _ -p "$HEROKU_AUTH_TOKEN" registry.heroku.com
