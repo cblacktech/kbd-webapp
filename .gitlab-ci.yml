@@ -15,11 +15,10 @@ build_image:
   
 
 release_image:
-  image: debian:latest
+  image: docker:latest
   stage: release
   before_script:
-    - apt-get update -y
-    - apt install curl docker -y
+    - apk add curl
     - curl https://cli-assets.heroku.com/install.sh | sh
   script:
     - docker login -u _ -p "$HEROKU_AUTH_TOKEN" registry.heroku.com
