@@ -1,30 +1,40 @@
+variables:
+  HEROKU_REGISTRY_IMAGE: registry.heroku.com/${HEROKU_APP_NAME}/web
+
 stages:
   - build
-  - release
+  - push
+  - deploy
 
 build_image:
-  image: docker:latest
   stage: build
+  image: docker:latest
   services:
     - docker:dind
   before_script:
-    - echo $CI_BUILD_TOKEN | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - echo $CI_BUILD_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
-  
 
-release_image:
+
+push_to_heroku:
+  stage: push
   image: docker:latest
-  stage: release
   services:
     - docker:dind
-  before_script:
-    - apk add curl
-    - apk add bash
-    - apk add nodejs
-    - curl https://cli-assets.heroku.com/install.sh | sh
   script:
-    - docker login -u _ -p "$HEROKU_AUTH_TOKEN" registry.heroku.com
-    - docker push "$HEROKU_REGISTRY_IMAGE"
-    - heroku container:release --app "$CI_PROJECT_NAME" web
+    - echo $CI_BUILD_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE
+    - echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
+    - docker tag $CI_REGISTRY_IMAGE $HEROKU_REGISTRY_IMAGE
+    - docker push $HEROKU_REGISTRY_IMAGE
+
+deploy_to_heroku:
+  stage: deploy
+  image: node:latest
+  services:
+    - docker:dind
+  script:
+    - npm install -g heroku
+    - heroku container:release web --app $HEROKU_APP_NAME
