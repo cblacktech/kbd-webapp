@@ -23,11 +23,29 @@ talisman = Talisman(app, force_https=True, content_security_policy=csp)
 
 @app.route('/', methods=['GET', 'POST'])
 def countdown():
+    text = ""
+    cnt = 3
+
+    text += ('-' * 25 * cnt) + '\n'
+    text += ('|' + '  ****            ****  ') * cnt + '|\n'
+    text += ('|' + ' *    **        **    * ') * cnt + '|\n'
+    text += ('|' + '  *      **  **      *  ') * cnt + '|\n'
+    text += ('|' + '   *       **       *   ') * cnt + '|\n'
+    text += ('|' + '    *              *    ') * cnt + '|\n'
+    text += ('|' + '     *            *     ') * cnt + '|\n'
+    text += ('|' + '      *          *      ') * cnt + '|\n'
+    text += ('|' + '       *        *       ') * cnt + '|\n'
+    text += ('|' + '        *      *        ') * cnt + '|\n'
+    text += ('|' + '         *    *         ') * cnt + '|\n'
+    text += ('|' + '          *  *          ') * cnt + '|\n'
+    text += ('|' + '           **           ') * cnt + '|\n'
+    text += ('-' * 25 * cnt) + '\n'
     if request.method == 'POST':
         print('GOT A POST REQUEST')
         print(request.get_json())
         # return redirect(url_for('display'))
-        return redirect('/display')
+        return render_template('display.html', title="Display Page", style="display.css",
+                               top_text="HAPPY BIRTHDAY !!!!", text=text)
     else:
         return render_template('countdown.html', title="Countdown", style='countdown.css', custom_js='countdown.js')
 
