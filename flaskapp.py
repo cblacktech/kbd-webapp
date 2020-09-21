@@ -26,7 +26,7 @@ def countdown():
 @app.route('/display')
 def display():
     text = ""
-    cnt = 4
+    cnt = 3
 
     text += ('-' * 25 * cnt) + '\n'
     text += ('|' + '  ****            ****  ') * cnt + '|\n'
