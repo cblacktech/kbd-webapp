@@ -7,7 +7,13 @@ import os
 app = Flask(__name__)
 port = int(os.environ.get("PORT", 5000))
 app.config['SECRET_KEY'] = 'sdfbW%$EYGHw$%Hwe4r'
-talisman = Talisman(app, force_https=True)
+
+csp = {
+    'default-src': [
+        '\'self\'',
+    ]
+}
+talisman = Talisman(app, force_https=True, content_security_policy=csp)
 
 
 # app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon.ico'))
