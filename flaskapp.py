@@ -32,6 +32,10 @@ def countdown():
 
 
 @app.route('/display')
+@talisman(
+    frame_options='ALLOW_FROM',
+    fram_options_allow_from='https://kbd-app.herokuapp.com/',
+)
 def display():
     text = ""
     cnt = 3
