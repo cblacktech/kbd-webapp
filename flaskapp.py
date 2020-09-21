@@ -9,9 +9,10 @@ port = int(os.environ.get("PORT", 5000))
 app.config['SECRET_KEY'] = 'sdfbW%$EYGHw$%Hwe4r'
 
 csp = {
-    'default-src': [
-        '\'self\'',
-    ]
+    'default-src': '\'self\'',
+    'img-src': '*',
+    'media-src': '*',
+    'script-src': '*',
 }
 talisman = Talisman(app, force_https=True, content_security_policy=csp)
 
