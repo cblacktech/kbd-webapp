@@ -55,7 +55,7 @@ var timeinterval = setInterval(updateClock, 1000);
 
 // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
 // var deadline = new Date(Date.parse(new Date()) + 1000 * 5);
-var deadline = new Date(Date.parse(new Date(2020, 8, 20, 12)) + 1000 * 5);
+var deadline = new Date(Date.parse(new Date(2021, 8, 20, 12)) + 1000 * 5);
 // var deadline = new Date(2019, 8, 20, 0, 0, 0, 0);
 current_date = new Date();
 if (deadline.getTime() < current_date.getTime()) {
