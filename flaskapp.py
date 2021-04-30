@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 port = int(os.environ.get("PORT", 5000))
-app.config['SECRET_KEY'] = 'sdfbW%$EYGHw$%Hwe4r'
+app.config['SECRET_KEY'] = str(os.environ.get("SECRET_KEY", "notanenviormentsecretkey"))
 
 csp = {
     'default-src': '\'self\'',
