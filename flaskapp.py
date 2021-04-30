@@ -23,23 +23,8 @@ talisman = Talisman(app, force_https=True, content_security_policy=csp)
 
 @app.route('/', methods=['GET', 'POST'])
 def countdown():
-    text = ""
     cnt = 3
-
-    text += ('-' * 25 * cnt) + '\n'
-    text += ('|' + '  ****            ****  ') * cnt + '|\n'
-    text += ('|' + ' *    **        **    * ') * cnt + '|\n'
-    text += ('|' + '  *      **  **      *  ') * cnt + '|\n'
-    text += ('|' + '   *       **       *   ') * cnt + '|\n'
-    text += ('|' + '    *              *    ') * cnt + '|\n'
-    text += ('|' + '     *            *     ') * cnt + '|\n'
-    text += ('|' + '      *          *      ') * cnt + '|\n'
-    text += ('|' + '       *        *       ') * cnt + '|\n'
-    text += ('|' + '        *      *        ') * cnt + '|\n'
-    text += ('|' + '         *    *         ') * cnt + '|\n'
-    text += ('|' + '          *  *          ') * cnt + '|\n'
-    text += ('|' + '           **           ') * cnt + '|\n'
-    text += ('-' * 25 * cnt) + '\n'
+    text = text_heart(3)
     if request.method == 'POST':
         print('GOT A POST REQUEST')
         print(request.get_json())
@@ -56,9 +41,15 @@ def countdown():
     fram_options_allow_from='https://kbd-app.herokuapp.com/',
 )
 def display():
-    text = ""
     cnt = 3
+    text = text_heart(cnt)
+    # print(text_list)
+    return render_template('display.html', title="Display Page", style="display.css",
+                           top_text="HAPPY BIRTHDAY !!!!", text=text)
 
+def text_heart(num_of_hearts):
+    cnt = num_of_hearts
+    text = ""
     text += ('-' * 25 * cnt) + '\n'
     text += ('|' + '  ****            ****  ') * cnt + '|\n'
     text += ('|' + ' *    **        **    * ') * cnt + '|\n'
@@ -73,10 +64,7 @@ def display():
     text += ('|' + '          *  *          ') * cnt + '|\n'
     text += ('|' + '           **           ') * cnt + '|\n'
     text += ('-' * 25 * cnt) + '\n'
-    # print(text_list)
-    return render_template('display.html', title="Display Page", style="display.css",
-                           top_text="HAPPY BIRTHDAY !!!!", text=text)
-
+    return text
 
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0', port=port)
